@@ -20,10 +20,13 @@ class Node {
 public class DoublyLinkedList {
    private Node head;
    private Node tail;
+
+   private int size;
     
    public DoublyLinkedList() {
       head = null;
       tail = null;
+      size = 0;
    }
     
    public void append(Node newNode) {
@@ -31,11 +34,14 @@ public class DoublyLinkedList {
          head = newNode;
          tail = newNode;
       }
-      else {
+      
+      else {      
          tail.next = newNode;
          newNode.previous = tail;
          tail = newNode;
       }
+
+      ++size;
    }
    
    public void prepend(Node newNode) {
@@ -48,6 +54,8 @@ public class DoublyLinkedList {
          head.previous = newNode;
          head = newNode;
       }
+      
+      ++size;
    }
    
    public void printList() {
@@ -76,6 +84,8 @@ public class DoublyLinkedList {
          currentNode.next = newNode;
          successor.previous = newNode;
       }
+      
+      ++size;
    }
    
    public void remove(Node currentNode) {
@@ -93,5 +103,74 @@ public class DoublyLinkedList {
          
       if (currentNode == tail)
          tail = predecessor;
+      
+      if (head != null)
+         --size;
    }
+   
+   public int size() {
+       return size;
+   }
+   
+   public void printRevList() {
+      Node node = tail;
+      while (node != null) {
+         System.out.print(node.data + " ");
+         node = node.previous;
+      }
+      System.out.println();
+   }
+   
+   /**Turns the linked list into an array
+    * 
+    * @return array with the data from the linked list
+    */
+   public int[] toArray() {
+       int[] arr = new int[size];
+       Node node = head;
+       
+       for (int i = 0; i < size;i++) {
+           arr[i] = node.data;
+           node = node.next;
+       }
+       
+       return arr;
+   }
+   
+   /**Returns the index of a node
+    * 
+    * @param node 
+    * @return index of param node
+    */
+   public int indexOf(Node node) {
+      Node tempNode = head;
+      int indx = 0;
+      
+      while (tempNode.data != node.data) {
+         ++indx;
+         tempNode = tempNode.next;
+      }
+      
+      return indx;
+   }
+   
+   /**Calculates the sum of the last elements 
+    * of the list
+    * 
+    * @param m number of elements from the end
+    * @return the sum of m elements
+    */
+   public int sumOfLastElements(int m) {
+      Node node = tail;
+      int sum = 0;
+      while (m != 0) {
+         sum += node.data;
+         node = node.previous;
+         --m;
+      }
+      
+      return sum;
+   }
+   
+
 }

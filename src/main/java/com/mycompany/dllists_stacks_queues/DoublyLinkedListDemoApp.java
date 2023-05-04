@@ -35,5 +35,23 @@ public class DoublyLinkedListDemoApp {
       // Output final list
       System.out.print("List after removing nodes: ");
       numList.printList();
+      
+      System.out.println("The size of the list is " + numList.size());
+      
+      System.out.println("The list in reverse order is: ");
+      numList.printRevList();
+      
+      int[] array = numList.toArray();
+      
+      System.out.print("Linked List as an array: [ ");
+      for(int i = 0; i < numList.size(); ++i) {
+          System.out.print(array[i] + ", ");
+      }
+      System.out.println("]");
+      
+      
+      System.out.println("Index of Node C: " + numList.indexOf(nodeC));
+      
+      System.out.println("Sum of the last 2 elements: "+numList.sumOfLastElements(2));
    }
 }
